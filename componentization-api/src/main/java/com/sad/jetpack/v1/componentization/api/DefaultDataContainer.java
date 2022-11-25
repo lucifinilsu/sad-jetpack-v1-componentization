@@ -34,7 +34,7 @@ public class DefaultDataContainer implements IDataContainer {
 
     @Override
     public IDataContainer putAll(Map map) {
-        map.putAll(map);
+        this.map.putAll(map);
         return this;
     }
 

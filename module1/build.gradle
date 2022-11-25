@@ -1,13 +1,11 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
-
 android {
     compileSdk rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.sad.jetpack.v1.componentization.demo"
         minSdk rootProject.ext.android.minSdkVersion
         targetSdk rootProject.ext.android.targetSdkVersion
         versionCode 1
@@ -31,12 +29,13 @@ android {
     }
 }
 
+
 dependencies {
-    api project(rootProject.ext.dependencies["local_componentization_api"])
-    annotationProcessor project(rootProject.ext.dependencies["local_componentization_compiler"])
     /*api rootProject.ext.dependencies["componentization_api"]
     annotationProcessor(rootProject.ext.dependencies["componentization_compiler"])*/
+    api project(rootProject.ext.dependencies["local_componentization_api"])
+    annotationProcessor project(rootProject.ext.dependencies["local_componentization_compiler"])
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["material"]
-    api project(":module1")
+    api rootProject.ext.dependencies["jsoup"]
 }

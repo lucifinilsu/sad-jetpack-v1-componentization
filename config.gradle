@@ -44,9 +44,9 @@ ext {
             "local_componentization_api"       : ":componentization-api",
             "local_componentization_annotation": ":componentization-annotation",
             "local_componentization_compiler"  : ":componentization-compiler",
-            "componentization_annotation"      : "",
-            "componentization_api"             : "",
-            "componentization_compiler"        : "",
+            "componentization_annotation"      : "com.github.lucifinilsu.sad-jetpack-v1-componentization:componentization-annotation:0.0.1",
+            "componentization_api"             : "com.github.lucifinilsu.sad-jetpack-v1-componentization:componentization-api:0.0.1",
+            "componentization_compiler"        : "com.github.lucifinilsu.sad-jetpack-v1-componentization:componentization-compiler:0.0.1",
             //SAD
             /*"sad-architecture-api"     : "com.sad.architecture.api:sad-architecture-api:${dependVersion["sad-architecture-api"]}",
             "sad-appgo-api"            : "com.sad.core.appgo:sad-appgo-api:${dependVersion["sad-appgo-api"]}",
