@@ -1,0 +1,20 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //提交
+    annotationProcessor rootProject.ext.dependencies["auto-service"]
+    compileOnly rootProject.ext.dependencies["auto-service"]
+    //api rootProject.ext.dependencies["componentization_annotation"]
+    api project(rootProject.ext.dependencies["local_componentization_annotation"])
+    api rootProject.ext.dependencies["javapoet"]
+    api rootProject.ext.dependencies["jsoup"]
+    api rootProject.ext.dependencies["gson"]
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}

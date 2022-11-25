@@ -1,0 +1,7 @@
+{
+  "url": "test://tsc/4",
+  "resPath": "crm\\test\\tsc\\4",
+  "className": "com.sad.jetpack.v1.componentization.demo.TestStaticComponent4",
+  "description": "回溯链成员4",
+  "version": 1
+}
