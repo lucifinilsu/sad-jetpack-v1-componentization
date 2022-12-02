@@ -18,6 +18,7 @@ import com.sad.jetpack.v1.componentization.api.LogcatUtils;
 import com.sad.jetpack.v1.componentization.api.ParasiticComponentRepositoryFactory;
 import com.sad.jetpack.v1.componentization.api.RequestImpl;
 import com.sad.jetpack.v1.componentization.api.SCore;
+import com.sad.jetpack.v1.componentization.demo.module1.NetDataRequestImpl;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NetDataRequestImpl.newCreator()
                 //testPostMsgToLocal();
                 SimpleNetDataMaster.get(getApplicationContext(), "https://www.baidu.com", "rid:" + RandomStringUtils.randomAlphabetic(5), new SimpleNetDataMaster.IDataObtainedCallback() {
                     @Override

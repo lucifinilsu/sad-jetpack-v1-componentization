@@ -1,5 +1,7 @@
 package com.sad.jetpack.v1.componentization.demo.module1;
 
+import static com.sad.jetpack.v1.componentization.demo.module1.SimpleNetDataCenterComponent.*;
+
 import androidx.annotation.NonNull;
 
 import com.sad.core.async.ISADTaskProccessListener;
@@ -9,7 +11,6 @@ import com.sad.jetpack.v1.componentization.annotation.Component;
 import com.sad.jetpack.v1.componentization.annotation.IPCChat;
 import com.sad.jetpack.v1.componentization.api.BodyImpl;
 import com.sad.jetpack.v1.componentization.api.IResponseSession;
-import com.sad.jetpack.v1.componentization.api.LogcatUtils;
 import com.sad.jetpack.v1.componentization.api.MapTraverseUtils;
 import com.sad.jetpack.v1.componentization.api.ResponseImpl;
 
@@ -19,11 +20,12 @@ import org.jsoup.Jsoup;
 
 import java.util.HashMap;
 import java.util.Map;
-
-@Component(url = "demo://dataCenter.org/class.json",description = "简易的网络数据供给中心示例,这里使用Component进行注解仅仅是方便获取对象而已，真正的调用是下面的方法IPC注解生成的寄生组件")
+@Deprecated
+@Component(url = BASE_KEY_HOST+"class.json",description = "简易的网络数据供给中心示例,这里使用Component进行注解仅仅是方便获取对象而已，真正的调用是下面的方法IPC注解生成的寄生组件")
 public class SimpleNetDataCenterComponent {
 
-    private final static int DEFAULT_TIMEOUT=1000;
+    private static final int DEFAULT_TIMEOUT=1000;
+    protected static final String BASE_KEY_HOST = "demo://dataCenter.org/";
 
     public interface IRequestDataHandler{
         void onHandle(Connection connection);
@@ -72,7 +74,7 @@ public class SimpleNetDataCenterComponent {
                         });
 
     }
-    @IPCChat(url = "demo://dataCenter.org/post/postJson/method1.json")
+    @IPCChat(url = BASE_KEY_HOST+"post/postJson/method1.json")
     public void postJson(String url, JSONObject json,IResponseSession session){
         postJson(url,json,DEFAULT_TIMEOUT,session);
     }

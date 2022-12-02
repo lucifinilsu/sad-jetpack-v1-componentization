@@ -16,7 +16,7 @@ import com.sad.jetpack.v1.componentization.api.SCore;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Deprecated
 public class SimpleNetDataMaster {
     private static Object host;
     public static void registerNetDataCenter(Context context){

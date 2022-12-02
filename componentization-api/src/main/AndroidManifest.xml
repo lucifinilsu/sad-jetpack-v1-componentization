@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sad.jetpack.v1.componentization.api">
-
+    <application>
+        <service android:name=".AppIPCService"
+            android:enabled="true"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="${applicationId}.ipc"/>
+            </intent-filter>
+        </service>
+        <!-- 全局Context提供者、无侵入式App初始化类 -->
+        <provider
+            android:multiprocess="true"
+            android:enabled="true"
+            android:exported="true"
+            android:authorities="${applicationId}.com.sad.jetpack.v1.componentization.api"
+            android:name=".InternalContextInitializerProvider"/>
+    </application>
 </manifest>
