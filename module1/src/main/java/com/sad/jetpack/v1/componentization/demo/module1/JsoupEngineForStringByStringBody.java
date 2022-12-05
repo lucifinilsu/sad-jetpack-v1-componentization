@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import org.jsoup.Connection;
 
-public class JsoupNetDataEngineBodyString extends JsoupNetDataEngine<String,String>{
+public class JsoupEngineForStringByStringBody extends JsoupEngineForString<String>{
 
     @Override
     public void onResetJsoupConnection(INetDataRequest<String> request, Connection connection) {

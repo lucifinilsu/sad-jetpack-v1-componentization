@@ -4,7 +4,7 @@ import org.jsoup.Connection;
 
 import java.util.Map;
 
-public class JsoupNetDataEngineBodyForm extends JsoupNetDataEngine<Map<String,String>,String>{
+public class JsoupEngineForStringByFormBody extends JsoupEngineForString<Map<String,String>>{
 
     @Override
     public void onResetJsoupConnection(INetDataRequest<Map<String, String>> request, Connection connection) {
