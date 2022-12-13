@@ -1,5 +1,7 @@
 package com.sad.jetpack.v1.componentization.demo.module1;
 
+import android.util.Log;
+
 import com.sad.core.async.ISADTaskProccessListener;
 import com.sad.core.async.SADTaskRunnable;
 import com.sad.core.async.SADTaskSchedulerClient;
@@ -14,7 +16,8 @@ public abstract class JsoupEngine<RQ,RP> implements INetDataProductEngine<RQ,RP>
                 .execute(new SADTaskRunnable<Connection.Response>("xxxx", new ISADTaskProccessListener<Connection.Response>() {
                     @Override
                     public void onSuccess(Connection.Response jsoupResponse) {
-                        onHandleJsoupResponse(request,jsoupResponse,chainOutput);
+                        //Log.e("sad-jetpack-v1","---------------->请求完毕");
+
                     }
 
                     @Override
@@ -39,6 +42,7 @@ public abstract class JsoupEngine<RQ,RP> implements INetDataProductEngine<RQ,RP>
                         ;
                         onResetJsoupConnection(request,connection);
                         Connection.Response response=connection.execute();
+                        onHandleJsoupResponse(request,response,chainOutput);
                         return response;
                     }
                 });

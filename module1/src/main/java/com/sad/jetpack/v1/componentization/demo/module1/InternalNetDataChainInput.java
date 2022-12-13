@@ -1,5 +1,7 @@
 package com.sad.jetpack.v1.componentization.demo.module1;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +34,13 @@ public class InternalNetDataChainInput<RQ,RP> implements INetDataChainInput<RQ,R
         this.currIndex++;
         if (currIndex>interceptorInputs.size()-1){
             //几乎不会到达这里，因为最后一个是默认内部拦截器（引擎）
+            Log.e("sad-jetpack-v1","---------------->输入链超界");
             return;
         }
         else {
+
             INetDataInterceptorInput<RQ,RP> interceptorInput=interceptorInputs.get(currIndex);
+            Log.e("sad-jetpack-v1","---------------->内部输入链执行："+interceptorInput);
             try {
                 interceptorInput.onInterceptedInput(this);
             }catch (Exception e){

@@ -18,7 +18,15 @@ import com.sad.jetpack.v1.componentization.api.LogcatUtils;
 import com.sad.jetpack.v1.componentization.api.ParasiticComponentRepositoryFactory;
 import com.sad.jetpack.v1.componentization.api.RequestImpl;
 import com.sad.jetpack.v1.componentization.api.SCore;
+import com.sad.jetpack.v1.componentization.demo.module1.INetDataObtainedCallback;
+import com.sad.jetpack.v1.componentization.demo.module1.INetDataObtainedExceptionListener;
+import com.sad.jetpack.v1.componentization.demo.module1.INetDataRequest;
+import com.sad.jetpack.v1.componentization.demo.module1.INetDataResponse;
+import com.sad.jetpack.v1.componentization.demo.module1.JsoupEngineForStringByStringBody;
+import com.sad.jetpack.v1.componentization.demo.module1.LogInterceptor;
+import com.sad.jetpack.v1.componentization.demo.module1.NetDataProcessorMasterImpl;
 import com.sad.jetpack.v1.componentization.demo.module1.NetDataRequestImpl;
+import com.sad.jetpack.v1.componentization.demo.module1.OkhttpEngineForStringByStringBody;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -46,9 +54,37 @@ public class MainActivity extends AppCompatActivity {
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetDataRequestImpl.newCreator()
+                INetDataRequest<String> request=NetDataRequestImpl.<String>newCreator()
+                        .method(INetDataRequest.Method.GET)
+                        .url("https://www.baidu.com")
+                        .create();
+                LogInterceptor logInterceptor=new LogInterceptor();
+                NetDataProcessorMasterImpl.<String,String>newInstance()
+                        .request(request)
+                        .addInputInterceptor(logInterceptor)
+                        .addOutputInterceptor(logInterceptor)
+                        .callback(new INetDataObtainedCallback<String, String>() {
+                            @Override
+                            public void onDataObtainedCompleted(INetDataResponse<String, String> response) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        tv_log.append(response.body());
+                                    }
+                                });
+
+                            }
+                        })
+                        .exceptionListener(new INetDataObtainedExceptionListener<String>() {
+                            @Override
+                            public void onDataObtainedException(INetDataRequest<String> request, Throwable throwable) {
+                                throwable.printStackTrace();
+                            }
+                        })
+                        .engine(new OkhttpEngineForStringByStringBody())
+                        .execute();
                 //testPostMsgToLocal();
-                SimpleNetDataMaster.get(getApplicationContext(), "https://www.baidu.com", "rid:" + RandomStringUtils.randomAlphabetic(5), new SimpleNetDataMaster.IDataObtainedCallback() {
+                /*SimpleNetDataMaster.get(getApplicationContext(), "https://www.baidu.com", "rid:" + RandomStringUtils.randomAlphabetic(5), new SimpleNetDataMaster.IDataObtainedCallback() {
                     @Override
                     public void onDataObtainedCompleted(IRequest request, int code, String s) {
                         tv_log.append(s);
@@ -58,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataObtainedException(IRequest request, Throwable throwable, String processorId) {
                         tv_log.append(throwable.getMessage());
                     }
-                });
+                });*/
             }
         });
     }

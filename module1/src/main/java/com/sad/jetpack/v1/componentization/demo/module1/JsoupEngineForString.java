@@ -1,5 +1,7 @@
 package com.sad.jetpack.v1.componentization.demo.module1;
 
+import android.util.Log;
+
 import org.jsoup.Connection;
 
 public class JsoupEngineForString<RQ> extends JsoupEngine<RQ,String>{
@@ -14,6 +16,7 @@ public class JsoupEngineForString<RQ> extends JsoupEngine<RQ,String>{
                 .request(request)
                 .headers(jsoupResponse.headers())
                 .create();
+        //Log.e("sad-jetpack-v1","---------------->开始调用输出链");
         chainOutput.proceed(netDataResponse);
     }
 }
