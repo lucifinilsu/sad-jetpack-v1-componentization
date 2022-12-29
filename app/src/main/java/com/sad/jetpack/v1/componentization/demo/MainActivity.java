@@ -18,17 +18,14 @@ import com.sad.jetpack.v1.componentization.api.LogcatUtils;
 import com.sad.jetpack.v1.componentization.api.ParasiticComponentRepositoryFactory;
 import com.sad.jetpack.v1.componentization.api.RequestImpl;
 import com.sad.jetpack.v1.componentization.api.SCore;
-import com.sad.jetpack.v1.componentization.demo.module1.INetDataObtainedCallback;
-import com.sad.jetpack.v1.componentization.demo.module1.INetDataObtainedExceptionListener;
-import com.sad.jetpack.v1.componentization.demo.module1.INetDataRequest;
-import com.sad.jetpack.v1.componentization.demo.module1.INetDataResponse;
-import com.sad.jetpack.v1.componentization.demo.module1.JsoupEngineForStringByStringBody;
-import com.sad.jetpack.v1.componentization.demo.module1.LogInterceptor;
-import com.sad.jetpack.v1.componentization.demo.module1.NetDataProcessorMasterImpl;
-import com.sad.jetpack.v1.componentization.demo.module1.NetDataRequestImpl;
-import com.sad.jetpack.v1.componentization.demo.module1.OkhttpEngineForStringByStringBody;
-
-import org.apache.commons.lang3.RandomStringUtils;
+import com.sad.jetpack.v1.datamodel.api.DataModelProducerImpl;
+import com.sad.jetpack.v1.datamodel.api.DataModelRequestImpl;
+import com.sad.jetpack.v1.datamodel.api.IDataModelObtainedCallback;
+import com.sad.jetpack.v1.datamodel.api.IDataModelObtainedExceptionListener;
+import com.sad.jetpack.v1.datamodel.api.IDataModelRequest;
+import com.sad.jetpack.v1.datamodel.api.IDataModelResponse;
+import com.sad.jetpack.v1.datamodel.api.extension.engine.OkhttpEngineForStringByStringBody;
+import com.sad.jetpack.v1.datamodel.api.extension.interceptor.LogDataModelInterceptor;
 
 public class MainActivity extends AppCompatActivity {
     private Object objectHost;
@@ -54,18 +51,19 @@ public class MainActivity extends AppCompatActivity {
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                INetDataRequest<String> request=NetDataRequestImpl.<String>newCreator()
-                        .method(INetDataRequest.Method.GET)
+
+                IDataModelRequest request= DataModelRequestImpl.newCreator()
+                        .method(IDataModelRequest.Method.GET)
                         .url("https://www.baidu.com")
                         .create();
-                LogInterceptor logInterceptor=new LogInterceptor();
-                NetDataProcessorMasterImpl.<String,String>newInstance()
+                LogDataModelInterceptor logInterceptor=LogDataModelInterceptor.newInstance();
+                DataModelProducerImpl.<String>newInstance()
                         .request(request)
                         .addInputInterceptor(logInterceptor)
                         .addOutputInterceptor(logInterceptor)
-                        .callback(new INetDataObtainedCallback<String, String>() {
+                        .callback(new IDataModelObtainedCallback<String>() {
                             @Override
-                            public void onDataObtainedCompleted(INetDataResponse<String, String> response) {
+                            public void onDataObtainedCompleted(IDataModelResponse<String> response) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -75,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         })
-                        .exceptionListener(new INetDataObtainedExceptionListener<String>() {
+                        .exceptionListener(new IDataModelObtainedExceptionListener() {
                             @Override
-                            public void onDataObtainedException(INetDataRequest<String> request, Throwable throwable) {
+                            public void onDataObtainedException(IDataModelRequest request, Throwable throwable) {
                                 throwable.printStackTrace();
                             }
                         })

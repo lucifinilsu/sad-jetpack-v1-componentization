@@ -56,6 +56,7 @@ ext {
             "sad-async"                : "com.sad.core.async:sad-async:latest.release",
             "sad-datastore"            : "com.sad.assistant:sad-datastore:latest.release",
             "sad-basic"                : "com.sad.basic:sad-basic:latest.release",*/
+            "sad-datamodel"                    : "com.github.lucifinilsu:sad-jetpack-v1-datamodel:0.0.5",
 
             //第三方
             "immersionbar"                     : "com.gyf.immersionbar:immersionbar:latest.release",

@@ -37,7 +37,5 @@ dependencies {
     annotationProcessor project(rootProject.ext.dependencies["local_componentization_compiler"])
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["material"]
-    api rootProject.ext.dependencies["jsoup"]
-    api rootProject.ext.dependencies["okhttp"]
-    api rootProject.ext.dependencies["okio"]
+    api rootProject.ext.dependencies["sad-datamodel"]
 }
