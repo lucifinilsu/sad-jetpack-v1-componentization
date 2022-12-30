@@ -7,6 +7,7 @@ import com.sad.jetpack.v1.componentization.annotation.IPCChat;
 import com.sad.jetpack.v1.componentization.annotation.NameUtils;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class SCore {
 
@@ -104,7 +105,7 @@ public class SCore {
         return IPCRemoteConnectorImpl.newBuilder(context);
     }
 
-    public static <O> void registerParasiticComponentFromHost(O host, IConstructor constructor) {
+    public static <O> void registerParasiticComponentFromHost(O host, IConstructor outSideConstructor) {
         Class<?> cls = host.getClass();
         String hostClsName = cls.getCanonicalName();
         Method[] methods = cls.getDeclaredMethods();
@@ -121,9 +122,12 @@ public class SCore {
                     try {
                         String className = cls.getPackage().getName() + "." + parasiticComponentClassSimpleName;
                         Class<IComponent> dc = (Class<IComponent>) Class.forName(className);
+                        IConstructor constructor=outSideConstructor;
                         if (constructor==null){
+                            //LogcatUtils.e("-------->外部注册类:"+dc+",urls="+ Arrays.asList(chat.url()));
                             constructor=new ParasiticComponentFromHostConstructor(host,chat);
                         }
+
                         IComponent component=constructor.instance(dc);
                         IComponentCallable componentCallable=InternalComponentCallable.newBuilder(component)
                                 .componentId(url)

@@ -10,7 +10,11 @@ public class SimpleObjectHost{
     @IPCChat(url = "demo://ipcchat.org/1/1.json")
     public void onReceivedMsg(String xxx, IResponseSession session){
         LogcatUtils.e("------->demo://ipcchat.org/1/1.json收到信息："+xxx);
-        session.postResponseData(BodyImpl.newBuilder().addData("yyy","回调信息").build());
+        //session.postResponseData(BodyImpl.newBuilder().addData("yyy","回调信息").build());
     }
-
+    @IPCChat(url = "demo://ipcchat.org/1/2.json")
+    public void onReceivedMsg(String ssss){
+        LogcatUtils.e("------->demo://ipcchat.org/1/2.json收到信息："+ssss);
+        //session.postResponseData(BodyImpl.newBuilder().addData("pppp","回调信息2").build());
+    }
 }

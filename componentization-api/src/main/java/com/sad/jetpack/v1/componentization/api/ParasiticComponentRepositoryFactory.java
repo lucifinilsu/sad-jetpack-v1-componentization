@@ -49,7 +49,7 @@ public class ParasiticComponentRepositoryFactory implements InstancesRepositoryF
         List<IComponentCallable> componentCallableInstances =new LinkedList<>();
         MapTraverseUtils.traverseGroup(DYNAMIC_COMPONENT_STORAGE, new MapTraverseUtils.ITraverseAction<Object,List<IComponentCallable>>() {
             @Override
-            public void onTraversed(Object hostObejct,List<IComponentCallable> componentCallables) {
+            public void onTraversed(Object hostObject,List<IComponentCallable> componentCallables) {
                 for (IComponentCallable componentCallable:componentCallables
                      ) {
                     try {

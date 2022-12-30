@@ -3,6 +3,7 @@ package com.sad.jetpack.v1.componentization.api;
 import com.sad.jetpack.v1.componentization.annotation.IPCChat;
 
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 
 final class ParasiticComponentFromHostConstructor implements IConstructor {
     private Object host;
@@ -22,6 +23,7 @@ final class ParasiticComponentFromHostConstructor implements IConstructor {
         }
         constructor.setAccessible(true);
         IComponent parasiticComponent = (IComponent) constructor.newInstance(host, chat);
+        //LogcatUtils.e("-------->内部注册类:"+parasiticComponent+",urls="+ Arrays.asList(chat.url()));
         return (T) parasiticComponent;
     }
 }

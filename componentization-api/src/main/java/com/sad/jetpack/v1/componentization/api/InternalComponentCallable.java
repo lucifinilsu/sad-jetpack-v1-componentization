@@ -3,6 +3,7 @@ package com.sad.jetpack.v1.componentization.api;
 import com.sad.core.async.SADHandlerAssistant;
 import com.sad.core.async.SADTaskSchedulerClient;
 
+import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeoutException;
@@ -154,6 +155,7 @@ final class InternalComponentCallable implements IComponentCallable, IComponentC
                     e.printStackTrace();
                 }
             }*/
+            LogcatUtils.e("-------------->组件执行："+ Arrays.asList(component.info().url()));
             component.onCall(request, new IResponseSession() {
                 @Override
                 public boolean postResponseData(IBody body,boolean intercepted) {
