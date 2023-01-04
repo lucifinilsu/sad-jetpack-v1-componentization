@@ -99,7 +99,7 @@ public class IPCRemoteConnectorImpl implements IPCRemoteConnector, IPCRemoteConn
             //默认目标是当前app的当前进程
             target= TargetImpl.newBuilder()
                     .toApp(context.getPackageName())
-                    .toProcess(CommonUtils.getCurrAppProccessName(context))
+                    .toProcess(CommonUtils.getCurrAppProcessName(context))
                     .build();
             //throw new Exception("ur ITarget is null !!!");
         }
@@ -107,7 +107,7 @@ public class IPCRemoteConnectorImpl implements IPCRemoteConnector, IPCRemoteConn
             //默认来源是当前app的当前进程
             request= RequestImpl.newBuilder("EMPTY_DATA_REQUEST")
                         .fromApp(context.getPackageName())
-                        .fromProcess(CommonUtils.getCurrAppProccessName(context))
+                        .fromProcess(CommonUtils.getCurrAppProcessName(context))
                         .build()
             ;
             //throw new Exception("ur IRequest is null !!!");

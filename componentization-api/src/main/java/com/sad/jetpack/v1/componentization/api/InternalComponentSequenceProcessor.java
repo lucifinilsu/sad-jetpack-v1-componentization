@@ -91,11 +91,11 @@ final class InternalComponentSequenceProcessor extends AbsInternalComponentProce
                 if (o1 instanceof ISortable && o2 instanceof ISortable){
                     return ((ISortable) o2).priority()-((ISortable) o1).priority();
                 }
-                return 0;
+                return -1;
             }
         });
         indexIntercepted.set(units.size()-1);
-        LogcatUtils.internalLog("---------->待执行的组件数量:"+units.size());
+        LogcatUtils.internalLog("---------->待执行的组件:"+units);
         countDownLatch=new CountDownLatch(units.size());
         SADTaskSchedulerClient.newInstance().execute(new SADTaskRunnable<IResponse>("PROCESSOR_COUNTDOWN", new ISADTaskProccessListener<IResponse>() {
             @Override

@@ -30,23 +30,33 @@ public class RequestImpl implements IRequest, IRequest.Builder, Parcelable {
     }
 
     public static IRequest.Builder newBuilder(String id){
-        return new RequestImpl(id);
+        return newBuilder(id,true);
     }
-
+    public static IRequest.Builder newBuilder(String id,boolean catchProcess){
+        return new RequestImpl(id,catchProcess);
+    }
     protected RequestImpl(){
         previousResponse(ResponseImpl.newBuilder().build());
     }
 
     private RequestImpl(String id){
+        this(id,true);
+    }
+    private RequestImpl(String id,boolean catchProcess){
         this();
         this.id=id;
         Context context=InternalContextHolder.get().getContext();
         if (context!=null){
             this.fromApp=context.getPackageName();
-            this.fromProcess= CommonUtils.getCurrAppProccessName(context);
+            if (catchProcess){
+                this.fromProcess= CommonUtils.getCurrAppProcessName(context);
+            }
+            else {
+                this.fromProcess=fromApp;
+            }
+
         }
     }
-
 
 
 

@@ -7,7 +7,6 @@ import com.sad.jetpack.v1.componentization.annotation.IPCChat;
 import com.sad.jetpack.v1.componentization.annotation.NameUtils;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 public class SCore {
 
@@ -82,6 +81,10 @@ public class SCore {
         return InternalComponentConcurrencyProcessor.newBuilder(id);
     }
 
+    /**
+     * 注意，此方法需要在用户同意隐私协议后才能去调用。
+     * @param context
+     */
     public static void initIPC(Context context){
         try {
             if (InternalContextInitializerProvider.mContext==null){
@@ -91,7 +94,7 @@ public class SCore {
                     .action(RemoteAction.REMOTE_ACTION_REGISTER_TO_MESSENGERS_POOL)
                     .request(RequestImpl.newBuilder("REMOTE_ACTION_REGISTER_TO_MESSENGERS_POOL")
                             .fromApp(context.getPackageName())
-                            .fromProcess(CommonUtils.getCurrAppProccessName(context))
+                            .fromProcess(CommonUtils.getCurrAppProcessName(context))
                             .build()
                     )
                     .build()
